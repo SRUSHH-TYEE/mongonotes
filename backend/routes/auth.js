@@ -7,11 +7,11 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = "HEySrushhh";
 const fetchuser = require("../middleware/fetchuser");
 
-// create a user using "/api/auth/craeteuser". 
+//ROUTE1: create a user using "/api/auth/craeteuser". 
 router.post('/createuser',
     [body('name', "Enter a valid name").isLength({ min: 3 }),
     body('password', "Enter a valid password").isLength({ min: 8 }),
-    body('email', "Enter a valid password").isEmail()]
+    body('email', "Enter a valid email").isEmail()]
     , async (req, res) => {
 
         // In case of errors, rerurn bad request and errors
@@ -51,7 +51,7 @@ router.post('/createuser',
     });
 
 
-// authenticate a user using POST "/api/auth/login"
+//ROUTE2: authenticate a user using POST "/api/auth/login"
 router.post('/login', [
     body("email", "Enter a valid email").isEmail(),
     body("password", "Password cannot be blank").exists()
@@ -92,7 +92,7 @@ router.post('/login', [
     }
 )
 
-//getting userdata using "/api/auth/getuser"
+//ROUTE3: getting userdata using "/api/auth/getuser" Login required
 
 router.post("/getuser",fetchuser, async(req,res)=>{
     try {

@@ -1,27 +1,34 @@
-const mongoose= require('mongoose');
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+const indianDate = () => {
+    const date = new Date(Date.now());
+    const options = { timeZone: 'Asia/Kolkata', hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const formattedDate = new Intl.DateTimeFormat('en-IN', options).format(date);
+    return formattedDate
+}
+
 const UserSchema = new Schema({
-    name:{
+    name: {
         type: String,
         required: true
     },
 
-    email:{
+    email: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
 
-    password:{
+    password: {
         type: String,
-        required:true
+        required: true
     },
 
-    date:{
-        type:Date,
-        default:Date.now
+    date: {
+        type: Date,
+        default: indianDate
     }
-});
+    });
 
 module.exports = mongoose.model('user', UserSchema)
